@@ -4,6 +4,25 @@
 
 using namespace std;
 
+class Player {
+public:
+	Player(string name) : name(name) {};
+
+private:
+	string name;
+	vector<string> cards;
+
+public:
+	string getName() {
+		return name;
+	}
+
+	void giveCard(string card) {
+		cards.push_back(card);
+	}
+};
+
+
 class Deal {
 public:
 	Deal(string dealer, string cards_1, string cards_2) 
@@ -13,13 +32,42 @@ private:
 	string dealer; 
 	string cards_1; 
 	string cards_2;
-	vector<string> cards;
+	vector<Player *> players;
+	vector<string *> cards;
 
 public:
 	void sort();
-	void print();
+	void print();	
+
+private:
 
 };
+
+
+void Deal::sort() {
+	players.push_back(new Player("N"));
+	players.push_back(new Player("E"));
+	players.push_back(new Player("S"));
+	players.push_back(new Player("W"));
+
+	// Find dealer
+	int dealer_index;
+	for (int i = 0; i < players.size(); ++i) {
+		if (players.at(i)->getName().compare(dealer) == 0) {
+			dealer_index = i;
+		}
+	}
+
+	int curr_player = ((dealer_index+1)%players.size());
+	
+	curr_player = ((curr_player+1)%players.size());
+
+}
+
+
+void Deal::print() {
+}
+
 
 int main () {
 	vector<Deal *> deals;
@@ -44,7 +92,9 @@ int main () {
 		getline(cin, input);
 	}
 
-	cout << deals.size() << endl;
+	for (int i = 0; i < deals.size(); ++i) {
+		deals.at(i)->sort();
+	}
 
 	return 0;
 }

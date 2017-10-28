@@ -1,26 +1,30 @@
-lines = input()
+def main():
 
-encypted_results = []
+	lines = input()
 
-for i in range(0,lines):
-	curr_result = input()
-	encypted_results.append(str(curr_result))
+	encypted_results = []
 
-for result in encypted_results:
-	# positive result
-	if result == "1" or result == "4" or result == "78":
-		print("+") 
+	for i in range(0,lines):
+		curr_result = input()
+		encypted_results.append(str(curr_result))
 
-	# negative result
-	if result.endswith("35"):
-		print("-")
+	for result in encypted_results:
+		# positive result
+		if result == "1" or result == "4" or result == "78":
+			print("+") 
 
-	# Failed
-	if result.startswith("9") and result.endswith("4"):
- 		print ("*")
+		# negative result
+		if result.endswith("35"):
+			print("-")
 
- 	# Not Completed
- 	if result.startswith("190"):
- 		print("?")
+		# Failed
+		if result.startswith("9") and result.endswith("4"):
+	 		print ("*")
 
- exit(0)
+	 	# Not Completed
+	 	if result.startswith("190"):
+	 		print("?")
+
+	exit(0)
+
+main()

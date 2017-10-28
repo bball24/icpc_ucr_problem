@@ -28,6 +28,6 @@ def main():
 	 	else:
 	 		print("+")
 
-	exit(0)
+	return 0
 
 main()

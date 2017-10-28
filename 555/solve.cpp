@@ -21,16 +21,93 @@ public:
 		cards.push_back(card);
 	}
 
-	void sort();
-
+	vector<string> sort();
 	void print();
+
+private:
+	int getValue(char val) {
+		char key[13] = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
+
+		for (unsigned i = 0; i < 13; ++i) {
+			if (val == key[i]) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+
+	vector<string> sort_vect(vector<string> suit) {
+		//vector<string> sorted;
+
+		// Bubble sort
+		int i, j;
+		bool swapped = true;
+		for (i = 1; swapped && i < suit.size(); ++i) {
+			swapped = false;
+			for(j = 0; j < suit.size()-i; ++j) {
+				if (getValue(suit.at(j).at(1)) > getValue(suit.at(j+1).at(1))) {
+					swapped = true;
+					string temp = suit.at(j);
+					suit.at(j) = suit.at(j+1);
+					suit.at(j+1) = temp;
+				}
+			}
+		}
+
+		return suit;
+	}
+
 };
 
-void Player::sort() {
+vector<string> Player::sort() {
+	vector<string> sorted;
 
+	// First sort by suit
+	vector<string> C;
+	vector<string> D;
+	vector<string> S;
+	vector<string> H;
+
+	for (unsigned i = 0; i < cards.size(); ++i) {
+		if (cards.at(i).at(0) == 'C') 
+			C.push_back(cards.at(i));
+		else if (cards.at(i).at(0) == 'D') 
+			D.push_back(cards.at(i));
+		else if (cards.at(i).at(0) == 'S') 
+			S.push_back(cards.at(i));
+		else if (cards.at(i).at(0) == 'H') 
+			H.push_back(cards.at(i));
+	}
+
+	C = sort_vect(C);
+	D = sort_vect(D);
+	S = sort_vect(S);
+	H = sort_vect(H);
+
+	// LOL
+	for (unsigned i = 0; i < C.size(); ++i) {
+		sorted.push_back(C.at(i));
+	}
+
+	for (unsigned i = 0; i < D.size(); ++i) {
+		sorted.push_back(D.at(i));
+	}
+
+	for (unsigned i = 0; i < S.size(); ++i) {
+		sorted.push_back(S.at(i));
+	}
+
+	for (unsigned i = 0; i < H.size(); ++i) {
+		sorted.push_back(H.at(i));
+	}
+
+	return sorted;
 }
 
 void Player::print() {
+	cards = this->sort();
 	cout << name << ": ";
 	for (unsigned i = 0; i < cards.size(); ++i) {
 		cout << " " <<  cards.at(i);
@@ -95,7 +172,7 @@ void Deal::deal() {
 
 	//Deal
 	int curr_player = ((dealer_index+1)%players.size()); // First player
-	for (int i = 0; i < cards.size(); ++i) {
+	for (unsigned i = 0; i < cards.size(); ++i) {
 		players.at(curr_player)->giveCard(cards.at(i));
 		// Next player
 		curr_player = ((curr_player+1)%players.size());

@@ -14,16 +14,19 @@ def main():
 			print("+") 
 
 		# negative result
-		if result.endswith("35"):
+		else if result.endswith("35"):
 			print("-")
 
 		# Failed
-		if result.startswith("9") and result.endswith("4"):
+		else if result.startswith("9") and result.endswith("4"):
 	 		print ("*")
 
 	 	# Not Completed
-	 	if result.startswith("190"):
+	 	else if result.startswith("190"):
 	 		print("?")
+
+	 	else:
+	 		print("+")
 
 	exit(0)
 

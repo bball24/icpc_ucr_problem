@@ -3,12 +3,16 @@
 
 using namespace std;
 
-class Deal () {
+class Deal {
 public:
-	Deal(string dealer, string cards_1, string cards_2);
-}
+	Deal(string dealer, string cards_1, string cards_2) 
+	: dealer(dealer), cards_1(cards_1), cards_2(cards_2) {};
 
-
+private:
+	string dealer; 
+	string cards_1; 
+	string cards_2;
+};
 
 int main () {
 	string dealer;

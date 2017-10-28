@@ -108,7 +108,7 @@ vector<string> Player::sort() {
 
 void Player::print() {
 	cards = this->sort();
-	cout << name << ": ";
+	cout << name << ":";
 	for (unsigned i = 0; i < cards.size(); ++i) {
 		cout << " " <<  cards.at(i);
 	}

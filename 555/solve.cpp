@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -12,15 +13,38 @@ private:
 	string dealer; 
 	string cards_1; 
 	string cards_2;
+	vector<string> cards;
+
+public:
+	void sort();
+	void print();
+
 };
 
 int main () {
-	string dealer;
-	getline(cin, dealer);
+	vector<Deal *> deals;
+	
+	string input;
+	getline(cin, input);
+	while (input.compare("#") != 0) {
+		// Is a beginning of new object
+		if (input.compare("N") == 0 || 
+			input.compare("E") == 0 || 
+			input.compare("S") == 0 || 
+			input.compare("W") == 0) {
+			string dealer = input;
+			string card_1;
+			getline(cin, card_1);
+			string card_2;
+			getline(cin, card_2);
 
-	string cards_1;
-	getline(cin, cards_1);
+			Deal * newDeal = new Deal(dealer, card_1, card_2);
+			deals.push_back(newDeal);
+		}
+		getline(cin, input);
+	}
 
-	string cards_2;
-	getline(cin, cards_2);
+	cout << deals.size() << endl;
+
+	return 0;
 }

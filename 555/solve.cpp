@@ -32,8 +32,8 @@ void Player::sort() {
 
 void Player::print() {
 	cout << name << ": ";
-	for (int i = 0; i < cards.size(); ++i) {
-		cout << cards.at(i);
+	for (unsigned i = 0; i < cards.size(); ++i) {
+		cout << " " <<  cards.at(i);
 	}
 	cout << endl;
 }
@@ -61,6 +61,18 @@ private:
 
 vector<string> Deal::cardify() {
 	vector<string> output;
+	string megastring = cards_1 + cards_2;
+
+	string curr_card = "";
+	for (unsigned i = 0; i < megastring.length(); ++i) {
+		curr_card += megastring.at(i);
+
+		// Every odd index
+		if((int)(i%2) != 0) {
+			output.push_back(curr_card);
+			curr_card = ""; // Clear
+		}
+	}
 
 	return output;
 }
@@ -72,21 +84,26 @@ void Deal::deal() {
 	players.push_back(new Player("E"));
 
 	// Find dealer
-	int dealer_index;
-	for (int i = 0; i < players.size(); ++i) {
+	unsigned dealer_index;
+	for (unsigned i = 0; i < players.size(); ++i) {
 		if (players.at(i)->getName().compare(dealer) == 0) {
 			dealer_index = i;
 		}
 	}
 
-	int curr_player = ((dealer_index+1)%players.size());
-	
-	//curr_player = ((curr_player+1)%players.size());
+	this->cards = this->cardify();
 
+	//Deal
+	int curr_player = ((dealer_index+1)%players.size()); // First player
+	for (int i = 0; i < cards.size(); ++i) {
+		players.at(curr_player)->giveCard(cards.at(i));
+		// Next player
+		curr_player = ((curr_player+1)%players.size());
+	}
 }
 
 void Deal::print() {
-	for (int i = 0; i < players.size(); ++i) {
+	for (unsigned i = 0; i < players.size(); ++i) {
 		players.at(i)->sort();
 		players.at(i)->print();
 	}
@@ -116,7 +133,7 @@ int main () {
 		getline(cin, input);
 	}
 
-	for (int i = 0; i < deals.size(); ++i) {
+	for (unsigned i = 0; i < deals.size(); ++i) {
 		deals.at(i)->deal();
 		deals.at(i)->print();
 	}

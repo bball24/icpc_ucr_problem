@@ -22,3 +22,5 @@ for result in encypted_results:
  	# Not Completed
  	if result.startswith("190"):
  		print("?")
+
+ exit(0)

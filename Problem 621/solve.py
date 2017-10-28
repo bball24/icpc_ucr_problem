@@ -10,3 +10,9 @@ for i in range(0,lines):
 for result in encypted_results:
 	if result == "1" or result == "4" or result == "78":
 		print("+")
+	if result[:-2] == "35"
+    	print(-)
+    if result[:1] == "9" and if result[:-1] == "4"
+    	print ()
+    if result[:3] == "190"
+    print(?)

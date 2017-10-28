@@ -9,4 +9,4 @@ for i in range(0,lines):
 # positive result
 for result in encypted_results:
 	if result == "1" or result == "4" or result == "78":
-		print("+")
+		print("+") 
